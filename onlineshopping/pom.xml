@@ -15,6 +15,13 @@
 	</properties>
 	<dependencies>
 
+		<!-- Linking backend project -->
+		<dependency>
+			<groupId>net.veera</groupId>
+			<artifactId>shoppingbackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!-- JAVA EE API -->
 		<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
 		<dependency>
@@ -39,7 +46,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<!-- JSTL -->
 		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
 		<dependency>

@@ -13,6 +13,7 @@
    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
    
    <context:component-scan base-package="net.veera.onlineshopping.controller"></context:component-scan>
+   <context:component-scan base-package="net.veera.shoppingbackend.daoimpl"></context:component-scan>
    
    <bean id = "viewResolver" class= "org.springframework.web.servlet.view.InternalResourceViewResolver">
    	<property name="prefix" value="/WEB-INF/views/"></property>
