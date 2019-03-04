@@ -27,6 +27,7 @@
 <title>Online Shopping - ${title}</title>
 <script>
 	window.menu = '${title}';
+	window.contextRoot = '${contextRoot}';
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -34,6 +35,12 @@
 
 <!-- Bootstrap Readable theme -->
 <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+
+<!-- Bootstrap dataTables -->
+<link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
+
+<!-- Fontawesome-->
+<link href="${css}/fontawesome.all.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -66,6 +73,11 @@
 			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true }">
 				<%@ include file="listProducts.jsp"%>
 			</c:if>
+			
+			<!--  include only when user clicks Show product -->
+			<c:if test="${userClickShowProduct == true }">
+				<%@ include file="singleProduct.jsp"%>
+			</c:if>
 		</div>
 		
 		<!-- Footer -->
@@ -76,7 +88,16 @@
 
 		<!-- Bootstrap core JavaScript -->
 		<script src="${js}/bootstrap.bundle.min.js"></script>
+		
+		<!-- DataTable Plugin-->
+		<script src="${js}/jquery.dataTables.js"></script>
 
+		<!-- DataTable Bootstrap Script-->
+		<script src="${js}/dataTables.bootstrap4.js"></script>
+		
+		<!-- fontawesome-->
+		<script src="${js}/fontawesome.all.js"></script>
+		
 		<!-- self coded JavaScript -->
 		<script src="${js}/myapp.js"></script>
 	</div>
