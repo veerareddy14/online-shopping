@@ -22,6 +22,10 @@ $(function() {
 
 	}
 
+	
+	
+	
+	
 	// code for Jquery Datatable
 
 	var $table = $('#productListTable');
@@ -90,7 +94,7 @@ $(function() {
 								}
 								return str;
 							}
-						},
+						}
 					]
 
 				});
@@ -104,5 +108,174 @@ $(function() {
 			$alert.fadeOut('slow');
 		},3000)
 	}
+	
+	
+	//----------------------------------
+	
+	
+	
+	//------------------------------
+	//Data Table for Admin starts
+	//-------------------------------
+	
+	var $adminProductsTable = $('#adminProductsTable');
 
+	// execute the below code only where we have this table
+
+	if ($adminProductsTable.length) {
+		
+		var jsonUrl = window.contextRoot + '/json/data/admin/all/products';
+		
+		$adminProductsTable
+				.dataTable({
+					lengthMenu : [
+							[ 10, 30, 50, -1 ],
+							[ '10 Records', '30 Records', '50 Records',
+									'All Records' ] ],
+					pageLength : 30,
+					ajax: {
+						url: jsonUrl,
+						dataSrc: ''
+					},
+					columns:[
+						{
+							data:'id',
+						},
+						{
+							data: 'code',
+							mRender: function(data,type,row){
+								return '<img src="'+window.contextRoot+'/resources/images/'+data+'.png" class = "admindataTableImg"/>';
+							}
+						},
+						{
+							data: 'name'
+						},
+						{
+							data: 'brand'
+						},
+
+						{
+							data: 'quantity',
+							mRender: function(data,type,row){
+								if (data < 1 ){
+									return '<span style = "color:red">Out of Stock !!</span>';
+								}
+								return data;
+							}
+						},
+						{
+							data: 'unitPrice',
+							mRender: function(data,type,row){
+								return '&#8377; ' + data;
+							}
+						},
+						{
+							data: 'active',
+							bSortable: false,
+							mRender:function(data,type,row){
+								var str = '';
+								str+='<label class="switch">';
+								if(data){
+									str+='<input type="checkbox" checked="checked"  value = "'+ row.id+'"/>';
+								}else{
+									str+='<input type="checkbox"  value = "'+ row.id+'"/>';
+								}
+								str+='<div class="slider round "></div></label>';
+								
+								return str;
+							}
+						},
+						{
+							data: 'id',
+							bSortable: false,
+							mRender: function(data,type,row){
+								var str='';
+								str += '<a href="'+window.contextRoot+'/manage/'+data+'/product" class ="btn btn-warning"><span class= "fas fa-edit"></span></a> &#160;';
+								return str;
+							}
+						}
+					],
+					initComplete: function(){
+						var api = this.api();
+						api.$('.switch input[type="checkbox"]').on('change', function(){
+							
+							var checkbox = $(this);
+							var checked = checkbox.prop('checked');
+							var dMsg = (checked)?'Do you want to activate the product?':
+												'Do you want to deactivate the product?';
+							var value = checkbox.prop('value');
+							bootbox.confirm({
+								size:'medium',
+								title:'Product Activation & Deactivation',
+								message: dMsg,
+								callback: function(confirmed){
+									if(confirmed){
+										console.log(value);
+										var activationUrl = window.contextRoot + '/manage/product/'+ value +'/activation';
+										console.log(activationUrl)
+										$.post(activationUrl, function(data){
+											bootbox.alert({
+												size:'medium',
+												title:'Information',
+												message: data
+											});	
+										});
+									}
+									else   {
+										checkbox.prop('checked',!checked);
+									}	
+								}	
+							});		
+						});
+					}
+
+				});
+	}
+	
+	//------------------------------
+	//Data Table for Admin ends
+	//-------------------------------
+	
+	//------------------------------
+	//client side validation code for category begins
+	//-------------------------------
+	
+	var $categoryForm = $('#categoryForm');
+	if($categoryForm.length){
+		
+		$categoryForm.validate({
+			rules:{
+				name:{
+					required:true,
+					minlength:2
+				},
+				description:{
+					required:true
+				}
+			},
+			messages:{
+				name:{
+					required:'Please add the category name!',
+					minlength:'The category name should not be less than 2 characters!'
+				},
+				description:{
+					required:'Please add a description for this category!'
+				}
+			},
+			errorElement:'em',
+			errorPlacement:function(error,element){
+				//add the class of form-text
+				error.addClass('form-text');
+				// add the error after the element
+				error.insertAfter(element);
+			}
+		});
+		
+	}
+	
+	
+	//------------------------------
+	//client side validation code for category ends
+	//-------------------------------
+// close of jquery
 });

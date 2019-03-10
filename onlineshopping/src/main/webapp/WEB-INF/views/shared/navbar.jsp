@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
 	<div class="container">
 		<a class="navbar-brand" id="home" href="${contextRoot}/home">Online
 			Shopping</a>
