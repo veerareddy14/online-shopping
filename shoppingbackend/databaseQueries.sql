@@ -65,8 +65,6 @@ INSERT INTO product
 (code,name,brand, description,unit_price,quantity,is_active,category_id,supplier_id) 
 VALUES ('PRDPQR123WGTX','Goodle Pixel','google','This is one of the best  android smart phones availale in the market right now!','57000','5',true,'3','2');
 
-
-
 INSERT INTO product 
 (code,name,brand, description,unit_price,quantity,is_active,category_id,supplier_id) 
 VALUES ('PRDMNO123PQRX','Macbook Pro','apple','This is one of the best laptops availale in the market right now!','54000','3',true,'1','2');
