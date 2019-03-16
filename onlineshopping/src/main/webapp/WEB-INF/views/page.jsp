@@ -23,6 +23,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="_csrf" content="${csrf.token}">
+<meta name="_csrf_header" content="${_csrf_headerName}">
 
 <title>Online Shopping - ${title}</title>
 <script>

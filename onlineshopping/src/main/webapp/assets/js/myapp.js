@@ -22,10 +22,16 @@ $(function() {
 
 	}
 
+	//to tackle the csrf token
 	
-	
-	
-	
+	var token = $('meta[name="_csrf"]').attr('content');
+	var header = $('meta[name="_csrf_header"]').attr('content');
+	if(token.length>0 && header.length>0){
+		//set the token header for ajax request
+		$(document).ajaxSend(function(e,xhr,options){
+			xhr.setRequestHeader(header,token);
+		});
+	}
 	// code for Jquery Datatable
 
 	var $table = $('#productListTable');
@@ -277,5 +283,48 @@ $(function() {
 	//------------------------------
 	//client side validation code for category ends
 	//-------------------------------
+	
+	//-------------------------------------------------
+	//client side validation code for login page begins
+	//--------------------------------------------------
+	
+	var $loginForm = $('#loginForm');
+	if($loginForm.length){
+		
+		$loginForm.validate({
+			rules:{
+				username:{
+					required:true,
+					email:true
+				},
+				password:{
+					required:true
+				}
+			},
+			messages:{
+				username:{
+					required:'Please enterthe user name!',
+					email:'Please enter a valid email address!'
+				},
+				password:{
+					required:'Please enter the password!'
+				}
+			},
+			errorElement:'em',
+			errorPlacement:function(error,element){
+				//add the class of form-text
+				error.addClass('form-text');
+				// add the error after the element
+				error.insertAfter(element);
+			}
+		});
+		
+	}
+	
+	
+	//---------------------------------------------
+	//client side validation code for login page ends
+	//----------------------------------------------
+	
 // close of jquery
 });
