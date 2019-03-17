@@ -110,3 +110,7 @@ input:checked + .slider:before {
 .modal {
 	padding-top:100px;
 }
+
+.table-responsive{
+	overflow-x:inherit;
+}
