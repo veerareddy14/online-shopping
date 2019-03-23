@@ -30,7 +30,7 @@
 					href="${contextRoot}/login">Login</a></li>
 				</security:authorize>
 				<security:authorize access = "isAuthenticated()">
-				<li class="dropdown">
+				<li class="dropdown" id="userCart">
 					<a href="#"
 						class="btn btn-default dropdown-toggle"
 						id="dropdownMenu1"
@@ -41,7 +41,7 @@
 					<ul class="dropdown-menu">
 						<security:authorize access= "hasAuthority('USER')">
 						<li>
-							<a href="${contextRoot}/cart">
+							<a href="${contextRoot}/cart/show">
 								<span class="fas fa-shopping-cart"></span>
 								<span class="badge">${userModel.cart.cartLines}</span>
 								- &#8377; ${userModel.cart.grandTotal}
